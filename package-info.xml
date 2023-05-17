@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE package-info SYSTEM "http://www.simplemachines.org/xml/package-info">
+<package-info xmlns="http://www.simplemachines.org/xml/package-info" xmlns:smf="http://www.simplemachines.org/">
+	<id>Kira_:tg_notify</id>
+	<name>Telegram notify</name>
+	<version>1.0b</version>
+	<type>modification</type>
+
+	<install for="2.1.*">
+		<database>install.php</database>
+		
+		<require-file name="tg_notify.php" destination="$sourcedir" />
+		<require-file name="tgnotify.template.php" destination="$themedir" />
+		<require-dir name="languages" destination="$themedir" />
+		
+		<hook hook="integrate_admin_areas" function="tg_notify_adminAreas" file="$sourcedir/tg_notify.php" />
+		<hook hook="integrate_modify_modifications" function="tg_notify_modifyModifications" file="$sourcedir/tg_notify.php" />
+		<hook hook="integrate_alert_types" function="tg_notify_user_setting" file="$sourcedir/tg_notify.php" />
+		<hook hook="integrate_buffer" function="tg_notify_integrate_buffer" file="$sourcedir/tg_notify.php" />
+		<hook hook="integrate_actions" function="tg_notify_actions" file="$sourcedir/tg_notify.php" />
+		<hook hook="integrate_outgoing_email" function="tg_notify_outgoing_email" file="$sourcedir/tg_notify.php" />
+		
+		
+		<redirect url="?action=admin;area=modsettings;sa=tg_notify" timeout="5000" />
+	</install>
+
+	<uninstall for="2.1.*">
+
+		<hook hook="integrate_admin_areas" function="tg_notify_adminAreas" file="$sourcedir/tg_notify.php" reverse="true" />
+		<hook hook="integrate_modify_modifications" function="tg_notify_modifyModifications" file="$sourcedir/tg_notify.php" reverse="true" />
+		<hook hook="integrate_alert_types" function="tg_notify_user_setting" file="$sourcedir/tg_notify.php" reverse="true" />
+		<hook hook="integrate_buffer" function="tg_notify_integrate_buffer" file="$sourcedir/tg_notify.php" reverse="true" />
+		<hook hook="integrate_actions" function="tg_notify_actions" file="$sourcedir/tg_notify.php" reverse="true" />
+		<hook hook="integrate_outgoing_email" function="tg_notify_outgoing_email" file="$sourcedir/tg_notify.php" reverse="true" />
+		
+		<remove-file name="$sourcedir/tg_notify.php" />
+		<remove-file name="$themedir/tgnotify.template.php" />
+		<remove-file name="$languagedir/tg_notify.english.php" />
+		<remove-file name="$languagedir/tg_notify.russian.php" />
+
+		<redirect url="?action=admin;area=packages;sa=browse" timeout="5000" />
+	</uninstall>
+
+</package-info>
